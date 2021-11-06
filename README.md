@@ -10,7 +10,9 @@ Fat-jars has severe disadvantages:
 - impossible to see the actually used dependencies and their versions
 
 This project demonstrates, how to run an application without packaging it into a fat-jar.
-This application is delivered as a tarball. After deployment, the directory layout looks like:
+This application intentionally depends on **eclipse-collections**,
+which is not provided by Flink distribution.
+The application is delivered as a tarball. After deployment, the directory layout looks like:
 ```text
 bin/
   app-submit.sh
