@@ -30,7 +30,7 @@ thus making them available in the `flink` client classpath.
 1. Customize the classpath of Job Manager and Task Manager - provide
 the libraries in the `yarn.ship-files` setting.
 
-For the implementation, see `app-submit.sh`.
+Look into `app-submit.sh` to see how it works.
 
 ## Enable customizable classpath for Flink client
 
