@@ -9,6 +9,8 @@ Fat-jars has severe disadvantages:
 - huge jars with duplicated classes - no sharing via libraries
 - impossible to see the actually used dependencies and their versions
 
+For the implementation, see `app-submit.sh`.
+
 This project demonstrates, how to run an application without packaging it into a fat-jar.
 This application is delivered as a tarball. After deployment, the directory layout looks like:
 ```text
