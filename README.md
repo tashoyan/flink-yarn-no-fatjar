@@ -27,7 +27,7 @@ The proposed solution does the following:
 1. Customize the classpath of the `flink` console client - provide
 a customizable environment variable: `FLINK_CLIENT_ADD_CLASSPATH`.
 When submitting the application, put the dependency jars into `FLINK_CLIENT_ADD_CLASSPATH`,
-thus make them available in the `flink` client classpath.
+thus making them available in the `flink` client classpath.
 1. Customize the classpath of Job Manager and Task Manager - provide
 the libraries in the `yarn.ship-files` setting.
 
