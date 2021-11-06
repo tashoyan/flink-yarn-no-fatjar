@@ -53,7 +53,9 @@ with the code:
 
 ## Build
 
+```shell
 mvn clean install
+```
 
 ## Install
 
