@@ -9,8 +9,6 @@ Fat-jars has severe disadvantages:
 - huge jars with duplicated classes - no sharing via libraries
 - impossible to see the actually used dependencies and their versions
 
-For the implementation, see `app-submit.sh`.
-
 This project demonstrates, how to run an application without packaging it into a fat-jar.
 This application is delivered as a tarball. After deployment, the directory layout looks like:
 ```text
@@ -24,12 +22,15 @@ lib/
 ```
 
 The proposed solution does the following:
+
 1. Customize the classpath of the `flink` console client - provide
 a customizable environment variable: `FLINK_CLIENT_ADD_CLASSPATH`.
 When submitting the application, put the dependency jars into `FLINK_CLIENT_ADD_CLASSPATH`,
 thus making them available in the `flink` client classpath.
 1. Customize the classpath of Job Manager and Task Manager - provide
 the libraries in the `yarn.ship-files` setting.
+
+For the implementation, see `app-submit.sh`.
 
 ## Enable customizable classpath for Flink client
 
