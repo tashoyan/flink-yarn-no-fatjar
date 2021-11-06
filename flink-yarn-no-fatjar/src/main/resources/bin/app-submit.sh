@@ -24,6 +24,8 @@ export FLINK_CLIENT_ADD_CLASSPATH="${jars//[[:space:]]/:}"
 # Inject the jars into the classpath of Job Manager and Task Manager
 yarn_jars="${jars//[[:space:]]/;}"
 
+export FLINK_CONF_DIR="$conf_dir/app-flink-conf"
+
 "$FLINK_HOME_DIR/bin/flink" \
   run \
   --target yarn-per-job \

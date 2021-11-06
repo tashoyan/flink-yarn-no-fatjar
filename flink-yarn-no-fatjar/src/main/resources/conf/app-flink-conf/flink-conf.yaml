@@ -1,0 +1,11 @@
+yarn.application.name: @{product.name}
+pipeline.name: @{product.name}
+
+taskmanager.numberOfTaskSlots: 1
+parallelism.default: 2
+
+jobmanager.memory.process.size: 1g
+taskmanager.memory.process.size: 1g
+
+restart-strategy: none
+yarn.application-attempts: 1

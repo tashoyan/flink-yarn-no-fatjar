@@ -150,6 +150,8 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>${maven-resources-plugin.version}</version>
           <configuration>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
             <delimiters>
               <!-- Avoid interfering with Shell or Spring - use non-standard delimiters -->
               <delimiter>${resources.filter.delimiter}</delimiter>

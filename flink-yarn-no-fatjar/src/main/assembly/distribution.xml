@@ -25,7 +25,7 @@
 			<directory>${distribution.build.dir}</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>conf/*</include>
+				<include>conf/**</include>
 			</includes>
 			<fileMode>${mode.file.data}</fileMode>
 			<directoryMode>${mode.dir}</directoryMode>
