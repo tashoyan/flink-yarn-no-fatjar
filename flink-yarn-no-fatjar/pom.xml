@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.tashoyan</groupId>
+    <artifactId>flink-yarn-no-fatjar-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+	<artifactId>flink-yarn-no-fatjar</artifactId>
+	<name>No fatjar : Distribution</name>
+	<description>Flink app without fat-jar - distribution</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<product.name>flink-yarn-no-fatjar</product.name>
+		<distribution.build.dir>${project.build.directory}/distribution</distribution.build.dir>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>flink-yarn-no-fatjar-app</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>Copy resources for the distribution</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>process-resources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>${distribution.build.dir}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>Copy libraries for the distribution</id>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${distribution.build.dir}/lib</outputDirectory>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>Generate distribution</id>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <descriptors>
+                <descriptor>${project.basedir}/src/main/assembly/distribution.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+		</plugins>
+
+	</build>
+
+</project>

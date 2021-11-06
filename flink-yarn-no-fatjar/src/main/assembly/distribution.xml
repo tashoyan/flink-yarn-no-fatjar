@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>distribution</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<baseDirectory>${product.name}</baseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${distribution.build.dir}</directory>
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>bin/*</include>
+			</includes>
+			<fileMode>${mode.file.exec}</fileMode>
+			<directoryMode>${mode.dir}</directoryMode>
+			<lineEnding>unix</lineEnding>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>${distribution.build.dir}</directory>
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>conf/*</include>
+			</includes>
+			<fileMode>${mode.file.data}</fileMode>
+			<directoryMode>${mode.dir}</directoryMode>
+			<lineEnding>unix</lineEnding>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>${distribution.build.dir}</directory>
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>lib/*</include>
+			</includes>
+			<fileMode>${mode.file.data}</fileMode>
+			<directoryMode>${mode.dir}</directoryMode>
+			<filtered>false</filtered>
+		</fileSet>
+	</fileSets>
+</assembly>

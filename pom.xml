@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.tashoyan</groupId>
+  <artifactId>flink-yarn-no-fatjar-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>No fatjar : Parent</name>
+  <description>Flink app without fat-jar - parent</description>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>flink-yarn-no-fatjar-app</module>
+    <module>flink-yarn-no-fatjar</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<resources.filter.delimiter>@{*}</resources.filter.delimiter>
+		<mode.file.exec>0755</mode.file.exec>
+		<mode.file.data>0644</mode.file.data>
+		<mode.dir>0755</mode.dir>
+
+    <scala-maven-plugin.version>4.5.4</scala-maven-plugin.version>
+    <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+
+    <java.binary.version>1.8</java.binary.version>
+    <scala.version>2.12.7</scala.version>
+    <scala.binary.version>2.12</scala.binary.version>
+    <flink.version>1.14.0</flink.version>
+    <log4j.version>2.14.1</log4j.version>
+    <eclipse-collections.version>10.4.0</eclipse-collections.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-library</artifactId>
+        <version>${scala.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-reflect</artifactId>
+        <version>${scala.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-core</artifactId>
+        <version>${flink.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-runtime</artifactId>
+        <version>${flink.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-clients_${scala.binary.version}</artifactId>
+        <version>${flink.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.collections</groupId>
+        <artifactId>eclipse-collections-api</artifactId>
+        <version>${eclipse-collections.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.collections</groupId>
+        <artifactId>eclipse-collections</artifactId>
+        <version>${eclipse-collections.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>${scala-maven-plugin.version}</version>
+          <configuration>
+            <args>
+              <arg>-Xfatal-warnings</arg>
+              <arg>-deprecation</arg>
+              <arg>-feature</arg>
+              <arg>-unchecked</arg>
+              <arg>-explaintypes</arg>
+              <arg>-Yno-adapted-args</arg>
+              <arg>-Ywarn-dead-code</arg>
+              <arg>-Ywarn-inaccessible</arg>
+              <arg>-Ywarn-infer-any</arg>
+              <arg>-Ywarn-nullary-override</arg>
+              <arg>-Ywarn-nullary-unit</arg>
+              <arg>-Ywarn-numeric-widen</arg>
+              <arg>-Ywarn-unused-import</arg>
+              <arg>-Ywarn-value-discard</arg>
+              <arg>-Xlint:_</arg>
+              <arg>-Ywarn-extra-implicit</arg>
+              <arg>-Ywarn-unused:_</arg>
+            </args>
+            <jvmArgs>
+              <jvmArg>-Xmx2048m</jvmArg>
+              <jvmArg>-Xss2m</jvmArg>
+            </jvmArgs>
+            <source>${java.binary.version}</source>
+            <target>${java.binary.version}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
+            <checkMultipleScalaVersions>true</checkMultipleScalaVersions>
+            <failOnMultipleScalaVersions>true</failOnMultipleScalaVersions>
+            <sendJavaToScalac>true</sendJavaToScalac>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <delimiters>
+              <!-- Avoid interfering with Shell or Spring - use non-standard delimiters -->
+              <delimiter>${resources.filter.delimiter}</delimiter>
+            </delimiters>
+            <useDefaultDelimiters>false</useDefaultDelimiters>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+          <configuration>
+            <appendAssemblyId>false</appendAssemblyId>
+            <!--
+            Workaround for huge guid ( > 2097151 ) on Mac.
+            See https://stackoverflow.com/a/46698905
+            -->
+            <tarLongFileMode>posix</tarLongFileMode>
+            <delimiters>
+              <delimiter>${resources.filter.delimiter}</delimiter>
+            </delimiters>
+            <archiverConfig>
+              <!--
+              directoryMode does not work for implicitly created directories
+              See https://issues.apache.org/jira/browse/MASSEMBLY-494
+              -->
+              <defaultDirectoryMode>${mode.dir}</defaultDirectoryMode>
+            </archiverConfig>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+</project>
