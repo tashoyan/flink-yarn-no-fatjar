@@ -17,11 +17,12 @@ app_jar_name="@{product.name}-app-@{project.version}.jar"
 app_jar="$lib_dir/$app_jar_name"
 
 jars=$(find "$lib_dir" -type f -name \*.jar | grep -v "$app_jar_name")
-classpath_jars="${jars//[[:space:]]/:}"
-yarn_jars="${jars//[[:space:]]/;}"
 
 # Inject the jars into the classpath of the command-line client 'flink'
-export FLINK_CLIENT_ADD_CLASSPATH="$classpath_jars"
+export FLINK_CLIENT_ADD_CLASSPATH="${jars//[[:space:]]/:}"
+
+# Inject the jars into the classpath of Job Manager and Task Manager
+yarn_jars="${jars//[[:space:]]/;}"
 
 "$FLINK_HOME_DIR/bin/flink" \
   run \
