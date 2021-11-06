@@ -15,10 +15,10 @@ This application is delivered as a tarball. After deployment, the directory layo
 bin/
   app-submit.sh
 conf/
-  app-conf.sh
+  <configuration files...>
 lib/
   <application jar>
-  <dependency jars>
+  <dependency jars...>
 ```
 
 The proposed solution does the following:
